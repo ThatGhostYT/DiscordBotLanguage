@@ -1,20 +1,30 @@
-// should i make a github for this?
+/*
+V1:
 
-// sure
+create new "bot" as client
 
-let codeV1 = `
-create new "bot" as client // Makes client and stores it in a variable.
+on messageCreate grab "message":
+	if lower(message->value) === "!ping":
+		message<-reply: "Pong!"
 
-on messageCreate grab "message": // Gets message object and stores it in a variable.
-  if lower(message->value) == "!ping":
-    message->reply with "Pong!";
-w`
+V2:
 
-let codeV2 = `
 create new bot named "John"
 
 when "John" gets a "message" grab "message":
   if lower(message->value) == "!ping":
-    message<-reply("Pong!");`
+    message<-reply("Pong!");
+*/
+
+const Lexer = require("./Lexer.ts");
+
+let code = `
+create new "bot" as client
+
+on "messageCreate" grab "message":
+	if lower(message->value) === "!ping":
+		message<-reply: "Pong!"
 `
 
+const lexer = new Lexer(code)
+console.log(lexer.lex())
